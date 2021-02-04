@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Special
+*.dot
+*.pid
