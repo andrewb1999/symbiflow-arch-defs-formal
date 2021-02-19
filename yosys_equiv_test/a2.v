@@ -4,17 +4,19 @@ module eqn2
         input  rst_i,
         input  ai,
         input  bi,
-        output reg yo
+        output yo
     );
+    reg test;
     always @ (posedge clk_i or posedge rst_i) begin
         if (rst_i) begin
-            yo <= 1'b0;
+            test <= 1'b0;
         end else begin
             if (ai|bi) begin
-                yo <= 1'b1;
+                test <= 1'b1;
             end else begin
-                yo <= 1'b0;
+                test <= 1'b0;
             end
         end
     end
+   assign yo = test;
 endmodule
