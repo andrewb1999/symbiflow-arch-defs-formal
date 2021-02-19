@@ -1,6 +1,7 @@
 module top(
   input [7:0] sw,
-  output [7:0] led
+  output [7:0] led,
+  input wire clk
   );
   wire [0:0] CLBLL_L_X2Y119_SLICE_X0Y119_A;
   wire [0:0] CLBLL_L_X2Y119_SLICE_X0Y119_A1;

@@ -9,14 +9,6 @@ module SR_GND (output GND);
 wire GND = 0;
 endmodule
 
-module SYN_OBUF(input I, output O);
-  assign O = I;
-endmodule
-
-module SYN_IBUF(input I, output O);
-  assign O = I;
-endmodule
-
 module FDRE_ZINI (output reg Q, input C, CE, D, R);
   parameter [0:0] ZINI = 1'b0;
   parameter [0:0] IS_C_INVERTED = 1'b0;
@@ -734,6 +726,8 @@ module IBUF_VPR (
 
   parameter PULLTYPE = "";
 
+  parameter IO_LOC_PAIRS = "";
+
   parameter IOSTANDARD = "";
 
   assign O = I;
@@ -775,6 +769,8 @@ module OBUFT_VPR (
   parameter [0:0] PULLTYPE_KEEPER = 1'b0;
 
   parameter PULLTYPE = "";
+
+  parameter IO_LOC_PAIRS = "";
 
   parameter IOSTANDARD = "";
   parameter DRIVE = 0;

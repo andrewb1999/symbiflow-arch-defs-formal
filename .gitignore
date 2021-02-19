@@ -34,3 +34,6 @@
 # Special
 *.dot
 *.pid
+*.jou
+*.log
+hd_visual
