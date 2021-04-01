@@ -32,6 +32,7 @@ endmodule
 module FDRE (output reg Q, input C, CE, D, R);
 
 parameter [0:0] INIT = 1'b0;
+parameter [0:0] IS_C_INVERTED = 1'b0;
 
 wire CE_SIG;
 wire SR_SIG;
@@ -43,7 +44,7 @@ CESR_MUX cesr_mux(
     .SR_OUT(SR_SIG)
 );
 
-FDRE_ZINI #(.ZINI(!|INIT), .IS_C_INVERTED(|0))
+FDRE_ZINI #(.ZINI(!|INIT), .IS_C_INVERTED(|IS_C_INVERTED))
   _TECHMAP_REPLACE_ (.D(D), .Q(Q), .C(C), .CE(CE_SIG), .R(SR_SIG));
 
 endmodule

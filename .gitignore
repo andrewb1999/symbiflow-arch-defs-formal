@@ -36,4 +36,5 @@
 *.pid
 *.jou
 *.log
+*.svg
 hd_visual
