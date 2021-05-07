@@ -1,0 +1,44 @@
+read_verilog -lib ../../techmap/cells_map.v
+read_verilog -lib ../../techmap/cells_sim.v
+read_verilog -lib ../../techmap/cells_formal.v
+read_verilog ../../techmap/cells_remove.v
+# read_verilog -lib -DSIMLIB_NOCHECKS +/simlib.v
+read_verilog -icells top_synth.v
+prep -flatten -top top
+opt_clean -purge
+techmap -map +/xilinx/lut_map.v -D LUT_WIDTH=6
+splitnets -ports;;
+opt_clean -purge
+opt_lut_ins -tech xilinx
+techmap -map ../../techmap/lut1_simplif.v
+rename -hide w:*
+opt_clean -purge
+opt -full
+show -prefix gold -format svg
+write_verilog -norename gold.v
+design -stash gold
+read_verilog -lib ../../techmap/cells_sim.v
+read_verilog -lib ../../techmap/cells_formal.v
+read_verilog ../../techmap/iobs.v
+read_verilog -lib ../../techmap/cells_map.v
+# read_verilog ../../techmap/cells_remove.v
+read_verilog top_bit.v
+prep -flatten -top top
+splitnets -ports;;
+opt_clean -purge
+rename -hide w:*
+techmap -map ../../techmap/lut_simplif.v
+prep -flatten -top top
+opt_clean -purge
+opt -full
+opt_lut_ins -tech xilinx
+techmap -map ../../techmap/lut1_simplif.v
+techmap -map ../../techmap/bels2vpr_map.v
+techmap -map ../../techmap/cells_remove.v
+opt_clean -purge
+opt -full
+rename -hide w:*
+opt_clean -purge
+show -prefix gate -format svg
+write_verilog gate.v
+design -stash gate

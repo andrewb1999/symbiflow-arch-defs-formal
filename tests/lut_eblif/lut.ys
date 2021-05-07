@@ -1,0 +1,52 @@
+# read_verilog -lib ../../techmap/cells_sim.v
+# read_verilog -lib ../../techmap/cells_formal.v
+# read_verilog ../../techmap/cells_remove.v
+read_json top_synth.json
+prep -flatten -top top
+splitnets -ports;;
+opt_clean -purge
+techmap -map +/xilinx/lut_map.v -D LUT_WIDTH=6
+opt_clean -purge
+show -prefix gold -format svg
+design -stash gold
+read_verilog -lib ../../techmap/cells_sim.v
+read_verilog -lib ../../techmap/cells_formal.v
+read_verilog ../../techmap/iobs.v
+read_verilog ../../techmap/cells_map.v
+read_verilog ../../techmap/cells_remove.v
+read_verilog top_bit.v
+prep -flatten -top top
+splitnets -ports;;
+opt_clean -purge
+show -prefix gate -format svg
+design -stash gate
+# design -copy-from gold -as gold top
+# design -copy-from gate -as gate top
+# equiv_make gold gate equiv
+# prep -flatten -top equiv
+
+# opt_clean -purge
+
+## method 1
+opt -full
+equiv_simple -seq 5
+equiv_induct -seq 5
+equiv_status -assert
+
+## method 2
+#equiv_struct -icells t:$adff t:$equiv
+#equiv_simple -seq 5
+#equiv_induct -seq 5
+#equiv_status -assert
+
+## method 3
+#techmap -map +/adff2dff.v
+#equiv_simple -seq 5
+#equiv_induct -seq 5
+#equiv_status -assert
+
+## method 4
+#clk2fflogic
+#equiv_simple -seq 10
+#equiv_induct -seq 10
+#equiv_status -assert

@@ -494,11 +494,15 @@ module RAMB18E1_VPR (
 	parameter integer SDP_READ_WIDTH_36 = 1'b0;
 	parameter integer Y0_READ_WIDTH_A_18 = 1'b0;
 	parameter integer Y1_READ_WIDTH_A_18 = 1'b0;
+	parameter integer READ_WIDTH_A_18 = 1'b0;
+	parameter integer READ_WIDTH_A_18 = 1'b0;
 	parameter integer READ_WIDTH_A_9 = 1'b0;
 	parameter integer READ_WIDTH_A_4 = 1'b0;
 	parameter integer READ_WIDTH_A_2 = 1'b0;
 	parameter integer Y0_READ_WIDTH_A_1 = 1'b0;
 	parameter integer Y1_READ_WIDTH_A_1 = 1'b0;
+	parameter integer READ_WIDTH_A_1 = 1'b0;
+	parameter integer READ_WIDTH_A_1 = 1'b0;
 	parameter integer READ_WIDTH_B_18 = 1'b0;
 	parameter integer READ_WIDTH_B_9 = 1'b0;
 	parameter integer READ_WIDTH_B_4 = 1'b0;

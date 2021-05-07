@@ -2,7 +2,7 @@ read_verilog ../../techmap/cells_sim.v
 read_verilog ../../techmap/iobs.v
 read_verilog ../../techmap/cells_map.v
 read_verilog ../../techmap/cells_formal.v
-read_verilog counter_arty.v
+read_verilog top.eblif.v
 prep -flatten -top top
 splitnets -ports;;
 opt_clean -purge
@@ -12,7 +12,7 @@ read_verilog ../../techmap/cells_sim.v
 read_verilog ../../techmap/iobs.v
 read_verilog ../../techmap/cells_map.v
 read_verilog ../../techmap/cells_formal.v
-read_verilog top.eblif.v
+read_verilog top_bit.v
 prep -flatten -top top
 splitnets -ports;;
 opt_clean -purge

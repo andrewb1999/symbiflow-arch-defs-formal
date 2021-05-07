@@ -10,7 +10,7 @@ read_verilog ../../techmap/cells_sim.v
 read_verilog ../../techmap/iobs.v
 read_verilog ../../techmap/cells_map.v
 read_verilog ../../techmap/cells_formal.v
-read_verilog top.eblif.v
+read_verilog top_synth.v
 prep -flatten -top top
 splitnets -ports;;
 design -stash gate

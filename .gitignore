@@ -38,3 +38,5 @@
 *.log
 *.svg
 hd_visual
+.Xil/
+*.str
