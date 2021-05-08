@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-import networkx as nx
-from networkx.algorithms import isomorphism
-
+from graph_tool.all import *
+from graph_tool.topology import *
 
 def clean_label(label):
     if not label.startswith('{'):
@@ -64,20 +63,21 @@ def node_match(gold_node, gate_node):
 
 
 def main():
-    gold = nx.nx_agraph.read_dot('../tests/bram/gold.dot')
-    gate = nx.nx_agraph.read_dot('../tests/bram/gate.dot')
-    DiGM = isomorphism.DiGraphMatcher(gold, gate, node_match)
-    isomorphic = DiGM.is_isomorphic()
+
+    gold = load_graph('../tests/bram/gold.dot')
+    gate = load_graph('../tests/bram/gate.dot')
+    isomorphic = isomorphism(gold, gate)
+    from IPython import embed; embed()
     if isomorphic:
         print('Designs are isomorphic. Checking cell parameters.')
     else:
         print('Designs are not isomorphic!')
         exit(0)
 
-    for pair in DiGM.mapping.items():
-        node_type = get_node_type(gold, pair[0])
-        if 'LUT' in node_type:
-            get_lut_input_mapping(gold, pair[0], gate, pair[1])
+    # for pair in DiGM.mapping.items():
+    #     node_type = get_node_type(gold, pair[0])
+    #     if 'LUT' in node_type:
+    #         get_lut_input_mapping(gold, pair[0], gate, pair[1])
 
 
 if __name__ == '__main__':
